@@ -40,8 +40,8 @@ def query_database(path, query):
     return df
 
 # Query downloaded databases
-weather_data = query_database('weather.db',"SELECT * FROM weather")
-air_data = query_database('air_quality.db',"SELECT * FROM air_quality")
+weather_data = query_database('data/weather.db',"SELECT * FROM weather")
+air_data = query_database('data/air_quality.db',"SELECT * FROM air_quality")
 
 ## Based on exploratory data analysis, preprocess data
 
@@ -354,3 +354,7 @@ importances = rf_clf.feature_importances_
 encoded_feature_names = numerical_features + list(preprocessor.named_transformers_['cat_ohe'].get_feature_names_out(categorical_features_ohe)) + categorical_features_le
 feature_importances = pd.DataFrame({'feature': encoded_feature_names, 'importance': importances})
 feature_importances = feature_importances.sort_values(by='importance', ascending=False)
+
+
+# Displaying the top 3 features
+print(feature_importances.head(3))
